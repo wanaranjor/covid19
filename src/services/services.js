@@ -1,7 +1,6 @@
 import axios from 'axios';
 
 export async function getGlobal() {
-	console.log('getGlobal')
 	try {
 		const URL_API_GLOBAL = "http://127.0.0.1:3000/api/Covid19s/summaryglobal";
 		const response = await axios(URL_API_GLOBAL);
@@ -20,7 +19,6 @@ export async function getGlobal() {
 }
 
 export async function getLocal() {
-	console.log('getLocal')
 	try {
 		const URL_API_LOCAL = "http://127.0.0.1:3000/api/Covid19s/summarylocal";
 		const response = await axios(URL_API_LOCAL);
@@ -34,8 +32,20 @@ export async function getLocal() {
 			}
 			return (data);
 		});
-		let dataRecovered = data.map(local => local.Recovered);
-		let dataDeaths = data.map(local => local.Deaths);
+		let dataRecovered = data.map(local => {
+			let data = {
+				recovered: local.Recovered,
+				date: local.Date
+			}
+			return (data);
+		});
+		let dataDeaths = data.map(local => {
+			let data = {
+				deaths: local.Deaths,
+				date: local.Date
+			}
+			return (data);
+		});
 
 		const confirmed = new Intl.NumberFormat().format(local.Confirmed);
 		const recovered = new Intl.NumberFormat().format(local.Recovered);
