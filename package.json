@@ -17,6 +17,8 @@
 		"@fullhuman/postcss-purgecss": "^2.1.2",
 		"axios": "^0.19.2",
 		"chart.js": "^2.9.3",
+		"chartjs-plugin-colorschemes": "^0.4.0",
+		"chartjs-plugin-datalabels": "^0.7.0",
 		"compression": "^1.7.1",
 		"polka": "next",
 		"sirv": "^0.4.0"

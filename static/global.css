@@ -10905,6 +10905,10 @@ video {
   transition-duration: 1000ms;
 }
 
+.bg-black-alt {
+  background: #191919;
+}
+
 @media (min-width: 640px) {
   .sm\:sr-only {
     position: absolute;

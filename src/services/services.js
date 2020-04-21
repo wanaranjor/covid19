@@ -1,9 +1,22 @@
-import axios from 'axios';
+import { API_BASE_URL } from "../config/api.js";
+import axios from "axios";
+
+export async function countCasos() {
+	try {
+		const url = `${API_BASE_URL}/Inscovid19s/count`;
+		const response = await axios.get(url);
+		const data = response.data.count;		
+		return data;
+	} catch (e) {
+		console.error(e);
+		return e;
+	}
+}
 
 export async function getGlobal() {
 	try {
 		const URL_API_GLOBAL = "http://127.0.0.1:3000/api/Covid19s/summaryglobal";
-		const response = await axios(URL_API_GLOBAL);
+		const response = await axios.get(URL_API_GLOBAL);
 		const data = response.data;
 		const global = data.Global;
 		// TODO: cambiar coma por punto en separador de miles.
@@ -25,33 +38,52 @@ export async function getLocal() {
 		const data = response.data;
 		const local = data[data.length - 1];
 
-		let dataConfirmed = data.map(local => {
+		let dataConfirmed = data.map((local) => {
 			let data = {
 				confirmed: local.Confirmed,
-				date: local.Date
-			}
-			return (data);
+				date: local.Date,
+			};
+			return data;
 		});
-		let dataRecovered = data.map(local => {
+		let dataRecovered = data.map((local) => {
 			let data = {
 				recovered: local.Recovered,
-				date: local.Date
-			}
-			return (data);
+				date: local.Date,
+			};
+			return data;
 		});
-		let dataDeaths = data.map(local => {
+		let dataDeaths = data.map((local) => {
 			let data = {
 				deaths: local.Deaths,
-				date: local.Date
-			}
-			return (data);
+				date: local.Date,
+			};
+			return data;
 		});
 
 		const confirmed = new Intl.NumberFormat().format(local.Confirmed);
 		const recovered = new Intl.NumberFormat().format(local.Recovered);
 		const deaths = new Intl.NumberFormat().format(local.Deaths);
 
-		return { dataConfirmed, dataRecovered, dataDeaths, confirmed, recovered, deaths };
+		return {
+			dataConfirmed,
+			dataRecovered,
+			dataDeaths,
+			confirmed,
+			recovered,
+			deaths,
+		};
+	} catch (e) {
+		console.error(e);
+		return e;
+	}
+}
+
+export async function getGroupByCity() {
+	try {
+		const URL_API_LOCAL = "http://localhost:3000/api/Inscovid19s/groupByCity";
+		const response = await axios(URL_API_LOCAL);
+		const data = response.data;
+		return data;
 	} catch (e) {
 		console.error(e);
 		return e;
