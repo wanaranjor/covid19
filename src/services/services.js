@@ -5,13 +5,38 @@ export async function countCasos() {
 	try {
 		const url = `${API_BASE_URL}/Inscovid19s/count`;
 		const response = await axios.get(url);
-		const data = response.data.count;		
+		const data = response.data.count;
 		return data;
 	} catch (e) {
 		console.error(e);
 		return e;
 	}
 }
+
+export async function totalEstado(estado) {
+	try {
+		const url = `${API_BASE_URL}/Inscovid19s/totalEstado?atencion=${estado}`;
+		const response = await axios.get(url);
+		const data = response.data[0].total;
+		return data;
+	} catch (e) {
+		console.error(e);
+		return e;
+	}
+}
+
+export async function getDataEstado(estado) {
+	try {
+		const url = `${API_BASE_URL}/Inscovid19s?[where][atenci_o]=${estado}`;
+		const response = await axios.get(url);
+		const data = response.data;
+		return data;
+	} catch (e) {
+		console.error(e);
+		return e;
+	}
+}
+
 
 export async function getGlobal() {
 	try {
@@ -81,6 +106,18 @@ export async function getLocal() {
 export async function getGroupByCity() {
 	try {
 		const URL_API_LOCAL = "http://localhost:3000/api/Inscovid19s/groupByCity";
+		const response = await axios(URL_API_LOCAL);
+		const data = response.data;
+		return data;
+	} catch (e) {
+		console.error(e);
+		return e;
+	}
+}
+
+export async function getTotalAtencionSexo() {
+	try {
+		const URL_API_LOCAL = "http://localhost:3000/api/Inscovid19s/totalAtencionSexo";
 		const response = await axios(URL_API_LOCAL);
 		const data = response.data;
 		return data;
