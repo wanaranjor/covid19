@@ -6,7 +6,6 @@
 
   onMount(async () => {
     createChartAtencionSexo(totalAtencionSexo);
-    console.log(createChartAtencionSexo)
   });
 </script>
 

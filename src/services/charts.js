@@ -1,7 +1,9 @@
 import Chart from "chart.js";
 import ChartDataLabels from "chartjs-plugin-datalabels";
 import 'chartjs-plugin-colorschemes/src/plugins/plugin.colorschemes';
-import { Paired12 } from "chartjs-plugin-colorschemes/src/colorschemes/colorschemes.brewer";
+import { Paired12, YlGnBu3 } from "chartjs-plugin-colorschemes/src/colorschemes/colorschemes.brewer";
+
+const scheme = YlGnBu3;
 
 export function createChart(dataConfirmed, dataRecovered, dataDeaths) {
   let ctx = document.getElementById("covidChart");
@@ -191,12 +193,12 @@ export function createChartEstados(totalRecuperados, totalFallecidos, totalCasa,
   let chart = new Chart(ctx, {
     type: "doughnut",
     data: {
+      labels: ['Recuperados', 'Fallecidos', 'Casa', 'Hospital', 'Hospital UCI'],
       datasets: [
         {
           data: [totalRecuperados, totalFallecidos, totalCasa, totalHospital, totalHospitalUci],
         },
       ],
-      labels: ['Recuperados', 'Fallecidos', 'Casa', 'Hospital', 'Hospital UCI']
     },
     options: {
       responsive: true,
@@ -230,15 +232,141 @@ export function createChartEstados(totalRecuperados, totalFallecidos, totalCasa,
 }
 
 export function createChartAtencionSexo(totalAtencionSexo) {
+  const atencion = totalAtencionSexo.map(entry => entry.atencion);
+  const labels = [...new Set(atencion)];
+  const totalF = totalAtencionSexo.filter(entry => entry.sexo === "F");
+  const totalM = totalAtencionSexo.filter(entry => entry.sexo === "M");
+
+  let fData = {
+    label: 'Femenino',
+    data: totalF.map(entry => entry.total),
+  };
+
+  let mData = {
+    label: 'Masculino',
+    data: totalM.map(entry => entry.total)
+  };
+
+  let sexoData = {
+    labels: labels,
+    datasets: [fData, mData]
+  };
+
+  let chartOptions = {
+    responsive: true,
+    plugins: {
+      ChartDataLabels,
+      colorschemes: {
+        scheme: Paired12,
+      },
+      datalabels: {
+        anchor: 'end',
+        align: 'end',
+        fontColor: 'white',
+        fontSize: 8
+      },
+    },
+    layout: {
+      padding: {
+        left: 5,
+        right: 5,
+        top: 10,
+        bottom: 10
+      }
+    },
+    scales: {
+      yAxes: [{
+        ticks: {
+          beginAtZero: true,
+          fontSize: 10,
+          fontColor: 'white'
+        }
+      }],
+      xAxes: [{
+        ticks: {
+          min: 0,
+          stepSize: 200,
+          beginAtZero: true,
+          fontSize: 10,
+          fontColor: 'white'
+        },
+      }]
+    },
+    legend: {
+      position: 'bottom',
+      fontColor: 'white'
+    },
+    title: {
+      display: true,
+      text: "Estado de atención por sexo COVID19",
+      fontSize: 15,
+      padding: 10,
+      fontColor: "white",
+    },
+  };
+
   let ctx = document.getElementById("chartAtencionSexo");
+  let chart = new Chart(ctx, {
+    type: "bar",
+    data: sexoData,
+    options: chartOptions
+  });
+}
+
+export function createChartTotalSexo(totalSexo) {
+  console.log(totalSexo)
+  let ctx = document.getElementById("chartTotalSexo");
+  let chart = new Chart(ctx, {
+    type: "pie",
+    data: {
+      labels: totalSexo.map((entry) => entry.sexo),
+      datasets: [
+        {
+          data: totalSexo.map((entry) => entry.total)
+        },
+      ],
+    },
+    options: {
+      responsive: true,
+      plugins: {
+        ChartDataLabels,
+        colorschemes: {
+          scheme: scheme,
+        }
+      },
+      layout: {
+        padding: {
+          left: 10,
+          right: 10,
+          top: 10,
+          bottom: 10
+        }
+      },
+      title: {
+        display: true,
+        text: "Colombia - Total por sexos COVID19",
+        fontSize: 15,
+        padding: 10,
+        fontColor: "white",
+      },
+      legend: {
+        position: 'right',
+        fontColor: 'white'
+      }
+    },
+  });
+}
+
+export function createChartPaisProcedencia(totalPaisProcedencia) {
+  let ctx = document.getElementById("chartPaisProcedencia");
   let chart = new Chart(ctx, {
     type: "horizontalBar",
     data: {
-      labels: groupCiudad.map((entry) => entry.ciudad),
+      labels: totalPaisProcedencia.map((entry) => entry.pais),
       datasets: [
         {
           labels: "Ciudades",
-          data: groupCiudad.map((entry) => entry.total),
+          data: totalPaisProcedencia.map((entry) => entry.total),
           backgroundColor: Paired12
         },
       ],
