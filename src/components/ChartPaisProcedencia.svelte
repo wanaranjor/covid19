@@ -6,7 +6,6 @@
 
   onMount(async () => {
     createChartPaisProcedencia(totalPaisProcedencia);
-    console.log(totalPaisProcedencia)
   });
 </script>
 

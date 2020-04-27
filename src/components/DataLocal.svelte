@@ -1,4 +1,5 @@
 <script>
+	export let dateInfo;
 	export let totalConfirmados;
 	export let totalRecuperados;
 	export let totalFallecidos;
@@ -12,11 +13,18 @@
 </script>
 
 <div class="w-2/3 pt-1">
-	<div class="p-2 flex items-center">
-		<img src="{image}" alt="image" />
-		<h4 class="text-base font-bold px-2">
-			{title}
-		</h4>
+	<div class="p-2 flex justify-between items-center">
+		<div class="flex">
+			<img src="{image}" alt="image" />
+			<h4 class="text-base font-bold px-2">
+				{title}
+			</h4>
+		</div>
+		<p class="text-gray-500">
+			Fecha Actualización {dateInfo}
+		</p>
+		<p class="text-gray-500">Fuente de información: <a class="font-semibold hover:text-white"
+				href="https://www.ins.gov.co/Noticias/Paginas/Coronavirus.aspx" target="_blank">INS Colombia</a>
 	</div>
 	<div class="flex">
 		<div class="flex-grow text-left px-4 py-2 text-center border-r border-gray-700">

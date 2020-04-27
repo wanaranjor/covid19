@@ -314,7 +314,6 @@ export function createChartAtencionSexo(totalAtencionSexo) {
 }
 
 export function createChartTotalSexo(totalSexo) {
-  console.log(totalSexo)
   let ctx = document.getElementById("chartTotalSexo");
   let chart = new Chart(ctx, {
     type: "pie",
@@ -404,7 +403,7 @@ export function createChartPaisProcedencia(totalPaisProcedencia) {
       },
       title: {
         display: true,
-        text: "Casos confirmados por cuidades COVID19",
+        text: "País procedencia",
         fontSize: 15,
         padding: 10,
         fontColor: "white",

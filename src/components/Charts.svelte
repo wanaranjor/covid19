@@ -13,6 +13,3 @@
 <div class="bg-white border">
   <canvas id="covidChart" width="800" height="400"></canvas>
 </div>
-<!-- <canvas id="confirmedchart" width="4" height="1"></canvas>
-<canvas id="recoveredchart" width="4" height="1"></canvas>
-<canvas id="deathschart" width="4" height="1"></canvas> -->

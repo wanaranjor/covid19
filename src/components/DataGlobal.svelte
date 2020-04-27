@@ -8,15 +8,18 @@
 
 <div class="w-1/3 pt-1">
 	<div class="p-2 flex items-center">
-		<img src="{image}" alt="image" />
-		<h4 class="text-base font-bold px-2">
-			{title}
-		</h4>
+		<div class="flex">
+			<img src="{image}" alt="image" />
+			<h4 class="text-base font-bold px-2">
+				{title}
+			</h4>
+		</div>
+		<p class="text-gray-500">Fuente de información: <a class="font-semibold hover:text-white"
+				href="https://covid19api.com/" target="_blank">COVID19API</a>
+		</p>
 	</div>
 	<div class="flex">
-		<div
-			class="flex-grow text-left px-4 py-2 text-center border-r border-gray-700"
-		>
+		<div class="flex-grow text-left px-4 py-2 text-center border-r border-gray-700">
 			<p class="text-sm font-bold text-yellow-400">
 				Confirmados
 			</p>
@@ -24,9 +27,7 @@
 				{totalConfirmed}
 			</p>
 		</div>
-		<div
-			class="flex-grow text-left px-4 py-2 text-center border-r border-gray-700"
-		>
+		<div class="flex-grow text-left px-4 py-2 text-center border-r border-gray-700">
 			<p class="text-sm font-bold text-green-400">
 				Recuperados
 			</p>
