@@ -10,5 +10,5 @@
 </script>
 
 <div class="bg-gray-900 border border-gray-700 rounded">
-	<canvas id="chartCiudad" width="800" height="600"></canvas>
+	<canvas id="chartCiudad" width="800" height="400"></canvas>
 </div>

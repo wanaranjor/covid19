@@ -66,3 +66,15 @@ export async function getLastRow(totalConfirmados) {
 		return e;
 	}
 }
+
+export async function getRangeAge(atencion) {
+	try {
+		const url = `${API_BASE_URL}/Inscovid19s/totalRangoEdad?atencion=${atencion}`;
+		const response = await axios(url);
+		const data = response.data;
+		return data;
+	} catch (e) {
+		console.error(e);
+		return e;
+	}
+}
