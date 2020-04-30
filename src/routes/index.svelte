@@ -1,8 +1,6 @@
 <script context="module">
   import { getGlobal, totalEstado, countCasos, getData, getLastRow, getRangeAge } from "../services/services.js";
   export async function preload() {
-
-   
     const totalConfirmados = await countCasos();
 
     const totalRecuperados = await totalEstado('RECUPERADO');
@@ -102,25 +100,25 @@
 </svelte:head>
 
 <div class="bg-black-alt px-3 py-1">
-  <div class=" bg-gray-900 border border-gray-800 rounded shadow p-2 my-3 text-white">
+  <div class="bg-gray-900 border border-gray-700 rounded shadow p-2 my-3 text-white">
     <div class="flex justify-between border-b border-gray-700 p-3">
-      <h3 class="text-lg leading-6 font-bold">
+      <h3 class="text-base md:text-lg leading-6 font-bold">
         Resumen Casos Coronavirus (COVID-19)
       </h3>
     </div>
-    <div class="flex">
+    <div class="flex flex-col sm:flex-row">
       <DataLocal {totalConfirmados} {totalRecuperados} {totalFallecidos} {totalCasa} {totalHospital} {totalHospitalUci}
         {dateInfo} title={optionsLocal.title} image={optionsLocal.image} />
-
-      <!-- <DataGlobal totalConfirmed={global.confirmed} totalRecovered={global.recovered} totalDeaths={global.deaths}
+<!-- 
+      <DataGlobal totalConfirmed={global.confirmed} totalRecovered={global.recovered} totalDeaths={global.deaths}
         title={optionsGlobal.title} image={optionsGlobal.image} /> -->
     </div>
   </div>
-  <div class="grid grid-rows-1 grid-cols-2 grid-flow-row gap-3 my-3">
+  <div class="flex flex-col md:grid md:grid-rows-1 md:grid-cols-2 md:grid-flow-row md:gap-3">
     <ChartCiudad {groupCiudad} />
     <ChartAtencionSexo {totalAtencionSexo} />
   </div>
-  <div class="grid grid-rows-1 grid-cols-3 grid-flow-row gap-3 my-3">
+  <div class="flexmd:grid md:grid-rows-1 md:grid-cols-3 md:grid-flow-row md:gap-3">
     <ChartEstados {totalRecuperados} {totalFallecidos} {totalCasa} {totalHospital} {totalHospitalUci} />
     <ChartTotalSexo {totalSexo} />
     <ChartPaisProcedencia {totalPaisProcedencia} />
