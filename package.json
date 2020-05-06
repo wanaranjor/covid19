@@ -23,6 +23,7 @@
     "chartjs-plugin-datalabels": "^0.7.0",
     "compression": "^1.7.1",
     "polka": "next",
+    "serialize-javascript": "^3.0.0",
     "sirv": "^0.4.0"
   },
   "devDependencies": {
