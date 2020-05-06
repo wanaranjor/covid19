@@ -13,7 +13,7 @@
     "test": "run-p --race dev cy:run",
     "watch:tailwind": "postcss static/tailwind.css -o static/global.css -w",
     "build:tailwind": "NODE_ENV=production postcss static/tailwind.css -o static/global.css",
-    "build": "npm run build:tailwind && sapper build --legacy"
+    "build": "npm run build:tailwind && sapper export"
   },
   "dependencies": {
     "@fullhuman/postcss-purgecss": "^2.1.2",
