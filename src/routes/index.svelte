@@ -24,7 +24,6 @@
     };
     // const datelastRowData = new Date(lastRowData[0].fecha_reporte_web)
     // const dateInfo = new Intl.DateTimeFormat('es-CO', options).format(new Date(datelastRowData));
-
     // return { totalConfirmados, totalRecuperados, totalFallecidos, totalCasa, totalHospital, totalHospitalUci, totalAtencionSexo, totalPaisProcedencia, totalSexo, groupCiudad, dateInfo };
     return { global, dataCountry };
   }
