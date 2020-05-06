@@ -2,7 +2,7 @@
   "name": "covid19-sapper",
   "description": "covid19 dashboard",
   "author": "Wilson Andŕes Naranjo Romero",
-  "license": "ICS",
+  "license": "ISC",
   "version": "0.0.1",
   "scripts": {
     "dev": "sapper dev",
