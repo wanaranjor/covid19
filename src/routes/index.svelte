@@ -1,45 +1,20 @@
 <script context="module">
-  import { getGlobal, totalEstado, countCasos, getData, getLastRow, getRangeAge } from "../services/services.js";
+  import { getGlobal, getCountry, totalEstado, countCasos, getData, getLastRow, getRangeAge } from "../services/services.js";
   export async function preload() {
-    const totalConfirmados = await countCasos();
-
-    const totalRecuperados = await totalEstado('RECUPERADO');
-    const totalFallecidos = await totalEstado('FALLECIDO');
-    const totalCasa = await totalEstado('CASA');
-    const totalHospital = await totalEstado('HOSPITAL');
-    const totalHospitalUci = await totalEstado('HOSPITAL UCI');
-
-    const totalAtencionSexo = await getData('totalAtencionSexo');
-    const totalPaisProcedencia = await getData('totalPaisProcedencia');
-    const totalSexo = await getData('totalSexo');
-    const groupCiudad = await getData('groupByCity');
-
-    //  let totalRangoCasa =  await getRangeAge('CASA');
-    //  let totalRangoRecuperado =  await getRangeAge('RECUPERADO');
-    //  let totalRangoFallecido =  await getRangeAge('FALLECIDO');
-    //  let totalRangoHospital =  await getRangeAge('HOSPITAL');
-    // let totalRangoUci = await getRangeAge('HOSPITAL UCI');
-
-    
-    // totalRangoEdad10.push(await getRangeAge('RECUPERADO',0, 10));
-    // totalRangoEdad10.push(await getRangeAge('FALLECIDO',0, 10));
-    // totalRangoEdad10.push(await getRangeAge('HOSPITAL',0, 10));
-    // totalRangoEdad10.push(await getRangeAge('HOSPITAL UCI', 0, 10));
-
-    // const totalRangoEdad20 = await getRangeAge('',11, 20);
-    // const totalRangoEdad30 = await getRangeAge('',21, 30);
-    // const totalRangoEdad40 = await getRangeAge('',31, 40);
-    // const totalRangoEdad50 = await getRangeAge('',41, 50);
-    // const totalRangoEdad60 = await getRangeAge('',51, 60);
-    // const totalRangoEdad70 = await getRangeAge('',61, 70);
-    // const totalRangoEdad80 = await getRangeAge('',71, 80);
-    // const totalRangoEdad90 = await getRangeAge('',81, 90);
-    // const totalRangoEdad100 = await getRangeAge('',91, 150);
-
-    // const totalRangoEdad = [totalRangoEdad10, totalRangoEdad20, totalRangoEdad30, totalRangoEdad40, totalRangoEdad50, totalRangoEdad60, totalRangoEdad70, totalRangoEdad80, totalRangoEdad90, totalRangoEdad100];
-
+    // const totalConfirmados = await countCasos();
+    // const totalRecuperados = await totalEstado('RECUPERADO');
+    // const totalFallecidos = await totalEstado('FALLECIDO');
+    // const totalCasa = await totalEstado('CASA');
+    // const totalHospital = await totalEstado('HOSPITAL');
+    // const totalHospitalUci = await totalEstado('HOSPITAL UCI');
+    // const totalAtencionSexo = await getData('totalAtencionSexo');
+    // const totalPaisProcedencia = await getData('totalPaisProcedencia');
+    // const totalSexo = await getData('totalSexo');
+    // const groupCiudad = await getData('groupByCity');
+    // const lastRowData = await getLastRow(totalConfirmados);
     const global = await getGlobal();
-    const lastRowData = await getLastRow(totalConfirmados);
+    const dataCountry =  await getCountry('colombia')
+    console.log(dataCountry)
 
     const options = {
       year: 'numeric', month: 'numeric', day: 'numeric',
@@ -47,10 +22,11 @@
       hour12: true,
       timeZone: 'America/Bogota'
     };
-    const datelastRowData = new Date(lastRowData[0].fecha_reporte_web)
-    const dateInfo = new Intl.DateTimeFormat('es-CO', options).format(new Date(datelastRowData));
+    // const datelastRowData = new Date(lastRowData[0].fecha_reporte_web)
+    // const dateInfo = new Intl.DateTimeFormat('es-CO', options).format(new Date(datelastRowData));
 
-    return { totalConfirmados, totalRecuperados, totalFallecidos, totalCasa, totalHospital, totalHospitalUci, totalAtencionSexo, totalPaisProcedencia, totalSexo, groupCiudad, dateInfo };
+    // return { totalConfirmados, totalRecuperados, totalFallecidos, totalCasa, totalHospital, totalHospitalUci, totalAtencionSexo, totalPaisProcedencia, totalSexo, groupCiudad, dateInfo };
+    return { global, dataCountry };
   }
 </script>
 
@@ -63,26 +39,20 @@
   import DataLocal from "../components/DataLocal.svelte";
   import DataGlobal from "../components/DataGlobal.svelte";
   import ChartPaisProcedencia from '../components/ChartPaisProcedencia.svelte';
-  // import ChartRangoEdad from '../components/ChartRangoEdad.svelte';
 
-  export let totalConfirmados;
-  export let totalRecuperados;
-  export let totalFallecidos;
-  export let totalCasa;
-  export let totalHospital;
-  export let totalHospitalUci;
-  export let totalAtencionSexo;
-  export let totalSexo;
-  export let totalPaisProcedencia;
-  export let groupCiudad;
-
-  // export let totalRangoCasa;
-  // export let totalRangoRecuperado;
-  // export let totalRangoFallecido;
-  // export let totalRangoHospital;
-  // export let totalRangoUci;
-  
-  export let dateInfo;
+  // export let totalConfirmados;
+  // export let totalRecuperados;
+  // export let totalFallecidos;
+  // export let totalCasa;
+  // export let totalHospital;
+  // export let totalHospitalUci;
+  // export let totalAtencionSexo;
+  // export let totalSexo;
+  // export let totalPaisProcedencia;
+  // export let groupCiudad;
+  // export let dateInfo;
+  export let global;
+  export let dataCountry;
 
   const optionsLocal = {
     title: "Colombia",
@@ -107,14 +77,17 @@
       </h3>
     </div>
     <div class="flex flex-col sm:flex-row">
-      <DataLocal {totalConfirmados} {totalRecuperados} {totalFallecidos} {totalCasa} {totalHospital} {totalHospitalUci}
-        {dateInfo} title={optionsLocal.title} image={optionsLocal.image} />
-<!-- 
+      <!-- <DataLocal {totalConfirmados} {totalRecuperados} {totalFallecidos} {totalCasa} {totalHospital} {totalHospitalUci}
+        {dateInfo} title={optionsLocal.title} image={optionsLocal.image} /> -->
+
       <DataGlobal totalConfirmed={global.confirmed} totalRecovered={global.recovered} totalDeaths={global.deaths}
-        title={optionsGlobal.title} image={optionsGlobal.image} /> -->
+        title={optionsGlobal.title} image={optionsGlobal.image} />
     </div>
   </div>
-  <div class="flex flex-col md:grid md:grid-rows-1 md:grid-cols-2 md:grid-flow-row md:gap-3">
+  <div class="flex flex-col md:grid md:grid-rows-1 md:grid-cols-1 md:grid-flow-row md:gap-3">
+    <Charts {dataCountry} />
+  </div>
+  <!-- <div class="flex flex-col md:grid md:grid-rows-1 md:grid-cols-2 md:grid-flow-row md:gap-3">
     <ChartCiudad {groupCiudad} />
     <ChartAtencionSexo {totalAtencionSexo} />
   </div>
@@ -122,6 +95,5 @@
     <ChartEstados {totalRecuperados} {totalFallecidos} {totalCasa} {totalHospital} {totalHospitalUci} />
     <ChartTotalSexo {totalSexo} />
     <ChartPaisProcedencia {totalPaisProcedencia} />
-    <!-- <ChartRangoEdad {totalRangoCasa} {totalRangoRecuperado} {totalRangoFallecido} {totalRangoHospital} {totalRangoUci}/> -->
-  </div>
+  </div> -->
 </div>
