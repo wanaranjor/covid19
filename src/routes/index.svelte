@@ -14,8 +14,7 @@
     // const lastRowData = await getLastRow(totalConfirmados);
     const global = await getGlobal();
     const dataCountry =  await getCountry('colombia')
-    console.log(dataCountry)
-
+    
     const options = {
       year: 'numeric', month: 'numeric', day: 'numeric',
       hour: 'numeric', minute: 'numeric', second: 'numeric',

@@ -15,7 +15,6 @@
       dataRecovered.push(entry.Recovered);
       dataDeaths.push(entry.Deaths);
     });
-    console.log(dataDate, dataConfirmed, dataRecovered, dataDeaths);
     // let dataRecovered = dataCountry.filter((entry) => entry.Recovered);
     // let dataDeaths = dataCountry.filter((entry) => entry.Deaths);
     // console.log(dataConfirmed, dataRecovered, dataDeaths);

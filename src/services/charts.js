@@ -504,8 +504,6 @@ export function createChartRangoEdad(totalRangoCasa, totalRangoRecuperado, total
   const sumTotalHospital10 = dataHospital10.length > 0 ? sumTotal(dataHospital10) : 0;
   const sumTotalUci10 = dataUci10.length > 0 ? sumTotal(dataUci10) : 0;
 
-  console.log(sumTotalCasa10, sumTotalRecuperado10, sumTotalFallecido10, sumTotalHospital10, sumTotalUci10);
-
   // const totalCasa10 = dataCasa10.map((entry) => entry.total);
   // console.log(totalCasa10);
 
